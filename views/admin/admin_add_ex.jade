@@ -1,0 +1,41 @@
+extends ../layout/l_admin
+
+block adminScripts
+	script(src='/js/admin/add_ex.js')
+
+block adminContent
+	div
+		h1 Add an Exercise to the Database
+		div
+			label Exercise Name (Required)
+			div
+				div#l-exercise-name
+				input#input-exercise-name.span5(type='text' placeholder=' Exercise')
+
+		div#l-exercise-desc
+			label Exercise Description (Optional)			
+			div
+				textarea#input-exercise-desc.span5(rows='5' placeholder=' Explain how to do the exercise...')
+
+		div
+			label YouTube Video Example (Optional)
+			input#input-video.span5(type='text' placeholder=' Full YouTube Url')
+
+		div#l-muscle-group
+			label Muscle Group
+			div
+				select#select-muscle-group
+
+		div#l-equipment
+			label Equipment
+			div
+				select#select-equipment
+
+		div#l-exercise-type
+			label Exercise Type
+			div
+				select#select-exercise-type
+
+		div#l-btn-add-exercise
+			button#btn-add-exercise.btn.btn-primary Add this Exercise
+			div#already-exists-warning

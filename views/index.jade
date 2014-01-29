@@ -1,0 +1,47 @@
+doctype 5
+html
+	head
+		title GymLocker
+
+		link(rel='stylesheet' href='/css/jquery-ui-1.8.17.custom.css')
+		link(rel='stylesheet' href='/css/bootstrap.css')
+		link(rel='stylesheet' href='/css/login.css')
+
+		script(src='/js/libs/jquery-1.7.1.min.js')
+		script(src='/js/libs/bootstrap.js')
+		script(src='/js/libs/bootstrap-alert.js')
+		script(src='/js/libs/bootstrap-tooltip.js')
+		script(src='/js/libs/bootstrap-popover.js')
+		script(src='/js/login.js')
+	body
+		div.navbar.navbar-fixed-top
+			div.navbar-inner
+				div.container
+					a#btn-demo.btn.btn-primary(href='/demo' rel='popover' data-content='Try a demo of the site. All features are available to explore. After your session has expired, all data will be removed from the site.' data-original-title='Demo Rules') Try a Demo!
+
+		div.content.container
+			div#warning.alert.alert-error
+				a#warning-close.close x
+				div
+
+			div.div-info-panel
+				div.row
+					form(action='/login', method='post')
+						div.signup
+							input.span3(type='text', name='loginUsername' placeholder=' Username' autofocus='autofocus')
+							br
+							input.span3(type='password' name='loginPassword' placeholder=' Password')
+							br
+							button.btn.btn-primary Sign In
+
+				div.row
+					form(action='/signup', method='post')
+						div.signup
+							p New to GymLocker? Sign up now!
+							input.span3(type='text', name='signupUsername' placeholder=' Username')
+							br
+							input.span3(type='password' name='signupPassword' placeholder=' Password')
+							br
+							input.span3(type='password' name='signupVerifyPassword' placeholder=' Verify Password')
+							br
+							button.btn.btn-primary Sign up for GymLocker

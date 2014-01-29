@@ -1,0 +1,49 @@
+extends ../boilerplate
+
+block scripts
+	script(src='/js/libs/jquery-ui-1.8.17.custom.min.js')
+	script.
+		$(document).ready(function() {
+			$('#li-fitness').addClass('active');
+			$('.dropdown-toggle').dropdown();
+		});
+	block fitnessScripts
+
+block content
+	div#l-content-subnav
+		div.subnav.subnav-fixed
+			ul.nav.nav-pills
+				li#li-ex-library
+					a(href='/fitness/library') Exercise Library
+				li#workout-dropdown.dropdown
+					a.dropdown-toggle(data-toggle='dropdown' href='#') Workouts 
+						b.caret
+					ul.dropdown-menu
+						li#li-create-wo
+							a(href='/fitness/create')
+								i.icon-plus-sign
+								|  Create Workout
+				//- 		li#li-all-workouts
+				//- 			a(href='/fitness/workouts') View My Workouts
+				//- li#routine-dropdown.dropdown
+				//- 	a.dropdown-toggle(data-toggle='dropdown') Routines 
+				//- 		b.caret
+				//- 	ul.dropdown-menu
+				//- 		li#li-all-routines
+				//- 			a(href='/fitness/routines') All Routines
+				//- 		li#li-wo-to-routine
+							//-a(href='/fitness/workout_to_routine') Convert a Workout to Routine
+				//- li#li-ex-stats
+				//- 	a(href='/fitness/exercise_stats') Exercise Stat
+
+				if nike
+					li.dropdown
+						a.dropdown-toggle(data-toggle='dropdown' href='#') Nike Plus
+							b.caret
+						ul.dropdown-menu
+							li#li-nike
+								a(href='/fitness/nike')
+									i.icon-fire
+									|  20 Run Summary
+	div.container-fluid
+		block fitnessContent

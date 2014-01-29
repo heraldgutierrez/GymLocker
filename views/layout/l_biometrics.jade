@@ -1,0 +1,14 @@
+extends ../boilerplate
+
+block stylesheets
+	link(rel='stylesheet' href='/css/biometric.css')
+
+block scripts
+	script 
+		$(document).ready(function() { 
+			$('#li-biometric').addClass('active');
+		});
+
+block content
+	div.container-fluid
+		block biometricContent

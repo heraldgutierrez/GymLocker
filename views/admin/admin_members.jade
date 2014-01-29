@@ -1,0 +1,46 @@
+extends ../layout/l_admin
+
+block adminScripts
+	script(src='/js/admin/members.js')
+
+block adminContent
+	div#delete_window.modal.fade
+		div.modal-header
+			h2#delete_header(align='center')
+		div#delete-window-content.modal-body
+			table#delete_table.table.table-striped.table-bordered.table-condensed
+				thead
+					tr
+						th Login Name
+						th
+							i.icon-user
+							|  Role
+				tbody#delete_body
+		div.modal-footer
+			a#btn-confirm-delete.btn.btn-success(href='#') Delete
+			a#btn-cancel-delete.btn(href='#') Cancel
+
+	div
+		h1 All Registered Members
+		section#admin-buttons
+			span.btn-group
+				button#btn-select-all.btn.btn-small
+					i.icon-ok-sign
+					|  Select All
+				button#btn-select-none.btn.btn-small.disabled
+					i.icon-remove-sign
+					|  Select None
+				button#btn-delete-selected.btn.btn-small.btn-danger.disabled
+					i.icon-trash.icon-white
+					|  Delete
+		section#admin-users-form
+			form#all-users-reg(name='all-users-reg')
+				table#membersTable.table.table-striped.table-bordered.table-condensed
+					thead
+						tr
+							th
+							th Login Name
+							th
+								i.icon-user
+								|  Role
+					tbody#members_body

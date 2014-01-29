@@ -1,0 +1,50 @@
+extends boilerplate
+
+block scripts 
+	script(src='/js/main_index.js')
+
+block content
+	div.container
+		input#user_id(type='hidden' value='#{user_id}')
+		div.row
+			div.span4.well.workouts-summary-nums
+				span#workouts-completed 0
+				p Passed Workouts
+
+			div.span4.offset3.well.workouts-summary-nums
+				span#workouts-planned 0
+				p Planned Workouts
+
+		if role == 4
+			div
+				h2 Welcome to GymLocker
+				p(style='white-space:pre;')
+					| You are currently using GymLocker as a demo.
+					| As a demo member, you will be able to view our exercise library and create custom workouts.
+					| However some of our features will be limited, such as: 
+					ul
+						li Being able to save your custom workouts
+						li Being able to use one of your workouts as a daily use routine
+						li Request to be trained by our many trainers who use GymLocker
+						ul
+							li Trainers are able to create a workout or routine that will help you get in shape
+						li Input and view your biometric statistics
+						li Also, if you have a Nike Plus account, you'll be able to link it with GymLocker to see a graph of your runs
+		else
+			div#workout
+				a(href='/fitness/create')
+					h1 Today's Workout
+				table#workout-table.table.table-striped.table-bordered.table-condensed
+					thead
+						th Exercise
+						th Reps
+						th Weight (lb)
+						th Muscle Group
+						th Equipment
+						th Comments
+					tbody#body
+
+			div#noWorkout(style='display: none')
+				h1 No workout for today
+				| Would you like to 
+				a(href='/fitness/create') create one?

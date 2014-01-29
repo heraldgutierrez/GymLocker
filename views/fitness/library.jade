@@ -1,0 +1,279 @@
+extends ../layout/l_fitness
+
+block fitnessScripts
+    script(src='/js/fitness/library.js')
+    script(src='/js/fitness/search.js')
+
+block stylesheets
+    link(rel='stylesheet' href='/css/fitness.css')
+    style.
+        #myCarousel, .libraryImg {
+            height : 550px;
+        }
+
+block fitnessContent
+    div#content-main
+        h1 Exercise Library
+            a#btn-help.pull-right(rel='tooltip' title='Help: How to use the Exercise Library')
+                img(src='/img/help/help.png')
+
+        ul.nav.nav-tabs
+            li#nav-muscle.active
+                a(href='#content-muscles' data-toggle='tab') Search
+            li#nav-results
+                a(href='#content-results' data-toggle='tab') Search Results
+
+        div.tab-content
+            div#content-muscles.tab-pane.active
+                div.span2
+                    ul#searchOptions.nav.nav-list
+                        li
+                            a#a-abs(href='#' data-muscle='Abs') Abs
+                        li
+                            a#a-back(href='#' data-muscle='Back') Back
+                        li
+                            a#a-biceps(href='#' data-muscle='Biceps') Biceps
+                        li
+                            a#a-calves(href='#' data-muscle='Calves') Calves
+                        li
+                            a#a-chest(href='#' data-muscle='Chest') Chest
+                        li
+                            a#a-forearms(href='#' data-muscle='Forearms') Forearms
+                        li
+                            a#a-glutes(href='#' data-muscle='Glutes') Glutes
+                        li
+                            a#a-hamstrings(href='#' data-muscle='Hamstrings') Hamstrings
+                        li
+                            a#a-neck(href='#' data-muscle='Neck') Neck
+                        li
+                            a#a-shoulders(href='#' data-muscle='Shoulders') Shoulders
+                        li
+                            a#a-thighs(href='#' data-muscle='Thighs') Thighs
+                        li
+                            a#a-triceps(href='#' data-muscle='Triceps') Triceps
+                    
+                    br
+                    div
+                        input#switch_diagram(type='checkbox')
+                        |  Use Female Diagram
+
+                table
+                    tr
+                        td
+                            div(align='center')
+                                h2#ex-title &nbsp;
+                        td
+                            div.span4
+                                div.input-prepend
+                                    span.add-on
+                                        i.icon-search
+                                    input#input-search(type='search' placeholder=' Search Exercises')
+                                div#search-exercise-list.library-search
+                    tr
+                        td
+                            div#male_diagram(style='display: block')
+                                img#muscles(usemap='#m_muscles' src='/img/male/muscles.png' alt='Human Muscle Parts')
+                                map#m_muscles(name='m_muscles')
+                                    area.map_area(data-muscle='Abs' shape='poly' coords='71,177, 75,205, 73,227, 72,248, 96,264, 102,278, 128,277, 134,264, 163,240, 161,164, 133,168, 107,160, 82,169, 71,177' href='#abs' alt='')
+                                    area.map_area(data-muscle='Back' shape='poly' coords='324,94, 346,109, 349,116, 341,119, 320,120, 315,128, 324,141, 325,168, 318,188, 321,198, 321,214, 334,241, 353,257, 377,259, 399,245, 407,225, 408,200, 425,169, 425,153, 433,129, 431,122, 409,117, 409,110, 425,96, 393,84, 384,61, 363,62, 356,80, 324,94' href='#back' alt='')
+                                    area.map_area(data-muscle='Biceps' shape='poly' coords='171,144, 169,150, 169,166, 173,187, 186,204, 193,197, 193,184, 204,180, 204,167, 197,151, 195,159, 189,163, 186,162, 171,144' href='#bicep' alt='')
+                                    area.map_area(data-muscle='Biceps' shape='poly' coords='53,161, 65,152, 68,161, 70,173, 70,186, 69,194, 66,206, 55,210, 44,197, 45,179, 53,161' href='#bicep' alt='')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='74,433, 80,452, 88,450, 102,434, 106,452, 106,465, 100,480, 101,504, 97,509, 88,524, 71,485, 69,461, 68,441, 74,433' href='#calves' alt='')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='139,439, 150,454, 170,435, 172,457, 167,482, 159,503, 146,494, 140,475, 139,439' href='#calves' alt='')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='384,437, 380,467, 383,481, 387,491, 393,482, 396,474, 403,485, 416,472, 418,452, 413,415, 398,414, 384,437' href='#calves' alt='')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='317,417, 329,405, 346,424, 349,471, 339,491, 334,479, 321,486, 312,459, 317,417' href='#calves' alt='')
+                                    area.map_area(data-muscle='Chest' shape='poly' coords='109,119, 100,111, 91,110, 83,110, 69,120, 65,134, 70,158, 77,165, 91,161, 103,158, 119,160, 140,166, 160,162, 170,141, 168,126, 151,107, 127,109, 109,119' href='#chest' alt='')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='426,198, 446,219, 454,204, 457,211, 456,261, 453,273, 440,271, 429,246, 423,222, 426,198' href='#forearms' alt='')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='282,190, 284,198, 292,214, 299,221, 303,213, 310,207, 310,219, 304,239, 285,269, 266,281, 271,224, 274,204, 282,190' href='#forearms' alt='')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='43,197, 34,219, 34,236, 28,249, 25,268, 43,272, 58,253, 69,219, 69,208, 56,212, 50,215, 43,197' href='#forearms' alt='')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='195,186, 204,182, 208,192, 206,202, 208,205, 210,267, 195,273, 177,231, 179,199, 187,208, 195,197, 195,186' href='#forearms' alt='')
+                                    area.map_area(data-muscle='Glutes' shape='poly' coords='320,247, 344,257, 359,275, 364,287, 376,264, 397,251, 408,245, 416,259, 413,280, 414,295, 419,310, 420,318, 411,327, 399,315, 371,312, 365,307, 357,312, 337,312, 310,299, 313,285, 310,266, 320,247' href='#glutes' alt='')
+                                    area.map_area(data-muscle='Hamstrings' shape='poly' coords='371,313, 399,318, 411,332, 419,321, 424,346, 422,367, 417,381, 416,413, 397,411, 385,432, 375,391, 370,363, 364,324, 371,313' href='#hamstring' alt='')
+                                    area.map_area(data-muscle='Hamstrings' shape='poly' coords='311,302, 333,314, 358,315, 360,357, 352,383, 351,399, 346,417, 329,401, 318,413, 312,389, 299,361, 311,302' href='#hamstrings' alt='')
+                                    area.map_area(data-muscle='Thighs' shape='poly' coords='162,247, 140,261, 124,290, 123,307, 124,352, 129,370, 134,400, 141,406, 150,399, 162,398, 170,409, 177,370, 181,339, 162,247' href='#thighs' alt='')
+                                    area.map_area(data-muscle='Neck' shape='poly' coords='102,83, 102,93, 93,104, 112,111, 132,103, 148,101, 147,92, 140,84, 143,56, 125,80, 117,83, 102,83' href='#neck' alt='')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='413,114, 419,117, 431,117, 441,127, 444,136, 448,127, 446,115, 437,103, 429,99, 413,114' href='#shoulders' alt='')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='345,111, 338,115, 317,115, 292,146, 288,136, 289,128, 290,121, 301,102, 319,95, 345,111' href='#shoulders' alt='')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='154,107, 169,125, 171,138, 188,162, 194,156, 198,134, 197,121, 190,110, 174,101, 168,102, 154,107' href='#shoulders' alt='')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='85,107, 76,106, 50,123, 49,148, 54,158, 65,148, 64,131, 66,120, 85,107' href='#shoulders' alt='')
+                                    area.map_area(data-muscle='Thighs' shape='poly' coords='74,251, 98,272, 113,305, 115,359, 110,382, 110,398, 100,404, 89,407, 83,391, 72,394, 62,377, 57,343, 74,251' href='#thighs' alt='')
+                                    area.map_area(data-muscle='Triceps' shape='poly' coords='435,131,426,158,427,170,422,179,423,190,445,214,452,204,456,193,451,172,453,170,452,157,435,131' href='#tricep' alt='')
+                                    area.map_area(data-muscle='Triceps' shape='poly' coords='288,152, 311,130, 319,140, 321,168, 317,182, 313,191, 311,204, 302,209, 294,207, 283,187, 288,152' href='#tricep' alt='')
+                            div#female_diagram(style='display: none')
+                                img#female_muscles(usemap='#f_muscles' src='/img/female/female_muscles.png' alt='Human Muscle Parts')
+                                map#f_muscles(name='f_muscles')
+                                    area.map_area(data-muscle='Abs' shape='poly' coords='93,205, 91,222, 95,244, 89,268, 88,279, 121,314, 126,316, 152,295, 160,290, 171,278, 159,252, 159,242, 165,225, 166,216, 171,206, 171,200, 162,202, 151,210, 121,202, 104,211, 93,205' href='#abs')
+                                    area.map_area(data-muscle='Back' shape='poly' coords='383,129, 356,148, 349,150, 336,188, 334,200, 333,218, 334,233, 341,246, 341,256, 335,269, 350,260, 359,265, 363,272, 365,284, 372,293, 374,302, 379,302, 390,288, 390,270, 394,261, 408,262, 406,246, 416,214, 429,191, 417,184, 409,174, 413,160, 410,150, 395,138, 383,129' href='#back')
+                                    area.map_area(data-muscle='Biceps' shape='poly' coords='75,199, 70,207, 66,225, 67,236, 75,240, 84,236, 89,225, 91,202, 86,198, 75,199' href='#biceps')
+                                    area.map_area(data-muscle='Biceps' shape='poly' coords='178,196, 174,197, 170,215, 177,245, 189,252, 192,233, 193,221, 190,205, 178,196' href='#biceps')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='109,448, 100,456, 98,465, 101,521, 104,535, 111,540, 110,501, 116,486, 115,464, 110,454, 109,448' href='#calves')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='153,425, 146,440, 153,448, 167,480, 168,454, 153,425' href='#calves')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='343,453, 337,458, 329,473, 328,509, 334,534, 339,534, 351,503, 358,490, 358,477, 343,453' href='#calves')
+                                    area.map_area(data-muscle='Calves' shape='poly' coords='389,459, 385,477, 383,494, 386,506, 388,524, 389,550, 403,532, 413,507, 415,497, 414,468, 408,455, 399,449, 389,459' href='#calves')
+                                    area.map_area(data-muscle='Chest' shape='poly' coords='100,163, 86,197, 102,208, 120,200, 125,201, 149,208, 162,200, 168,199, 176,193, 165,167, 157,155, 146,157, 126,170, 115,170, 100,163' href='#chest')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='67,236, 54,258, 40,292, 51,299, 70,274, 84,247, 67,236' href='#forearms')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='178,247, 187,275, 198,289, 203,304, 216,300, 211,285, 206,260, 193,238, 178,247' href='#forearms')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='308,235, 289,265, 280,298, 289,306, 298,289, 310,277, 318,257, 317,246, 308,235' href='#forearms')
+                                    area.map_area(data-muscle='Forearms' shape='poly' coords='438,243, 441,274, 448,292, 448,309, 457,301, 461,289, 462,252, 438,243' href='#forearms')
+                                    area.map_area(data-muscle='Glutes' shape='poly' coords='334,271, 327,290, 325,318, 329,331, 326,368, 330,366, 334,351, 346,339, 363,336, 374,321, 391,336, 408,343, 419,358, 423,353, 419,332, 424,323, 421,291, 411,266, 398,263, 392,270, 391,286, 378,306, 373,303, 363,285, 359,268, 350,262, 334,271' href='#glutes')
+                                    area.map_area(data-muscle='Hamstrings' shape='poly' coords='326,374, 326,402, 335,440, 349,424, 359,444, 362,432, 357,421, 367,401, 367,378, 375,367, 380,376, 381,393, 384,401, 381,445, 390,438, 395,434, 412,446, 412,421, 418,408, 418,394, 422,368, 405,343, 386,335, 374,326, 361,337, 343,343, 334,359, 330,369, 326,374' href='#hamstrings')
+                                    area.map_area(data-muscle='Neck' shape='poly' coords='129,118, 128,127, 114,136, 115,149, 100,159, 103,164, 116,169, 126,168, 132,161, 145,155, 157,154, 161,150, 147,142, 141,132, 141,118, 129,118' href='#neck')
+                                    area.map_area(data-muscle='Neck' shape='poly' coords='366,121, 366,140, 382,142, 395,134, 393,118, 385,116, 373,116, 366,121' href='#neck')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='100,160, 91,160, 76,170, 72,199, 91,200, 97,173, 100,160' href='#shoulders')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='165,169, 169,178, 176,194, 190,203, 191,187, 180,156, 150,145, 157,154, 165,169' href='#shoulders')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='351,149, 333,155, 322,164, 315,182, 316,194, 335,193, 337,183, 346,165, 351,149' href='#shoulders')
+                                    area.map_area(data-muscle='Shoulders' shape='poly' coords='418,155, 414,160, 409,172, 423,187, 444,196, 442,175, 431,158, 418,155' href='#shoulders')
+                                    area.map_area(data-muscle='Thighs' shape='poly' coords='86,278, 78,303, 77,330, 76,365, 84,421, 113,420, 113,400, 117,389, 123,381, 127,389, 125,405, 128,416, 140,408, 156,407, 167,364, 171,317, 171,285, 124,317, 91,290, 86,278' href='#thighs')
+                                    area.map_area(data-muscle='Triceps' shape='poly' coords='331,192, 322,207, 312,218, 311,233, 289,265, 317,255, 317,245, 333,213, 331,192' href='#triceps')
+                                    area.map_area(data-muscle='Triceps' shape='poly' coords='428,196, 424,205, 438,240, 442,256, 454,263, 460,248, 444,198, 438,194, 430,191, 428,196' href='#triceps')
+
+
+            div#content-results.tab-pane
+                div.modal-header
+                    h2#exercise_header(align='center') No Muscle Part Selected
+                div#results-table.modal-body
+                    div#emptyContainer(style='display: block')
+                    div#fullContainer(style='display: none')
+                        table#search_results.table.table-striped.table-bordered.table-condensed
+                            thead
+                                th Name
+                                th Description
+                                th Muscle
+                                th Equipment
+                                th Exercise
+                                th View
+                                th Add to Workout
+                            tbody#search_body
+
+    div#video_window.videoModal.fade
+        div.modal-header
+            a.close(data-dismiss='modal') x
+            h2#video-header
+        div#video-content.modal-body
+        div.modal-footer
+            button#btn-close-video.btn Close
+
+    div#workout-window.videoModal.fade
+        div.modal-header
+            a.close(data-dismiss='modal') x
+            h2#workout-header
+        div#workout-content.modal-body
+            div#add-exisiting
+                table
+                    tr
+                        td(colspan='2')
+                            div#add-date
+                                | Workout : 
+                                select#select-date
+                                    option(SELECTED value='0') - Create a new workout -
+                            div#create-date(style='display: none')
+                                | Select a date : 
+                                input#datepicker(type='data' name='date' value='#{date}')
+                            input#add-exercise(type='hidden')
+                        td(rowspan='2')
+                            | &nbsp;
+                            textarea#add-comment(rows='3' placeholder='Comments...')
+                    tr
+                        td Reps : 
+                            input#add-reps.ex-number-input(type='number' min='0')
+                        td Weight (lb) : 
+                            input#add-weight.ex-number-input(type='number' min='0')
+            div#create-new(style='display: none')
+        div.modal-footer
+            button#btn-add-workout.btn.btn-success Add
+            button#btn-create-workout.btn.btn-success(style='display: none') Add
+            button#btn-close-workout.btn Close
+
+    div#content-help.well(style='display: none')
+        h1
+            u
+                i Help: Exercise Library
+        br
+
+        div#libraryCarousel.carousel
+            div.carousel-inner(align='center')
+                font(color='white')
+                    div#first-item.item.active
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-0.png' width='450' height='400')
+                        div.carousel-caption
+                            | Clicking the 
+                            u "Use Female Diagram"
+                            |  will switch between using a Male or Female diagram.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-1.png' width='450' height='400')
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-2.png' width='450' height='400')
+                        div.carousel-caption
+                            | Choosing from either the list of muscle groups or clicking on the any of the body parts on the diagram will display all exercises with that muscle group.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-3.png')
+                        div.carousel-caption
+                            | The results of all exercises with that muscle is then displayed.
+                            br
+                            | Details of each exercises are shown, as well as an option for viewing an example video and adding to a workout is available.
+                    div.item'
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-4.png')
+                        div.carousel-caption
+                            | Choosing the 
+                            u "Example Video"
+                            |  button will display an example video.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-5.png')
+                    div.item
+                        div(style='height: 550px')
+                            img(src='/gymlocker/img/help/exercise-library/exercise-search-6.png')
+                        div.carousel-caption
+                            | Choosing the 
+                            u "Add to a Workout"
+                            |  button will display a form to add the exercise to a workout.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-7.png')
+                        div.carousel-caption
+                            | You have 
+                            i two options
+                            | :
+                            br
+                            |  1. Add to an existing workout or<br>
+                            |  2. Create a new workout with this exercise.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-8.png')
+                        div.carousel-caption
+                            h4 Option 1: Adding to an Existing Workout
+                            | Simply select the date of the workout from the dropdown list to add an exercise to.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-9.png')
+                        div.carousel-caption
+                            h4 Option 2: Create a new Workout
+                            | Leaving the option as 
+                            u "- Create a New Workout -""
+                            | , after clicking the 
+                            u "Add"
+                            |  button, a new input field will appear.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-10.png')
+                        div.carousel-caption
+                            h4 Option 2: Create a new Workout
+                            | Clicking on the input field will display a calender where you will be able to select the date on which you would like to do the workout.
+                    div.item
+                        div.libraryImg
+                            img(src='/img/help/exercise-library/exercise-search-11.png')
+                        div.carousel-caption
+                            | After you have selected an existing workout or creating a date for a new workout, fill out the additional fields: <u>'Reps'</u>, <u>'Weight (lb)'</u> or <u>'Comment'</u>. Then click the <u>'Add'</u> button to complete the process.
+
+            a.carousel-control.left(href='#libraryCarousel' data-slide='prev') &lsaquo;
+            a.carousel-control.right(href='#libraryCarousel' data-slide='next') &rsaquo;
+        div
+            input#disable_help(type='checkbox')
+            |  Never Show Again
+            button#btn-close-help.btn.pull-right Close
+        

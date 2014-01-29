@@ -1,0 +1,13 @@
+extends ../boilerplate
+
+block content
+	div#l-content-subnav
+		div.subnav.subnav-fixed
+			ul.nav.nav-pills
+				li#li-clients
+					a(href='/trainer/clients') My Clients
+				li#li-requests
+					a(href='/trainer/requests') Client Requests
+
+	div.container-fluid
+		block trainerContent

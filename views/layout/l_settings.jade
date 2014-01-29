@@ -1,0 +1,17 @@
+extends ../boilerplate
+
+block content
+	div#l-content-subnav.container
+		div.subnav.subnav-fixed
+			ul.nav.nav-pills
+				li#btn-info
+					a(href='/settings') Personal Info
+
+				if role == 3 && inQueue ==0
+					li#btn-apply-pro
+						a(href='/settings/apply_for_trainer') Apply for Trainer Status
+
+				li#btn-preferences
+					a(href='/settings/preferences') Preferences
+
+		block settingsContent

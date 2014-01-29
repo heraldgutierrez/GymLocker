@@ -1,0 +1,21 @@
+extends ../boilerplate
+
+block scripts
+	script
+		$(document).ready(function() {
+			$('#li-find').addClass('active');
+		});
+
+block content
+	div#l-content-subnav
+		div.subnav.subnav-fixed
+			ul.nav.nav-pills
+				li#li-find-trainer
+					a(href='/find_a_trainer') Find a Trainer
+
+				if role == 2
+					li#li-make-available
+						a(href='/trainer/make_available') Make Myself Available
+
+	div.container-fluid
+		block findTrainerContent

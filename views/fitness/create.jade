@@ -1,0 +1,173 @@
+extends ../layout/l_fitness
+
+block fitnessScripts
+	script(src='/js/fitness/create.js')
+	script(src='/js/fitness/search.js')
+
+block stylesheets
+	link(rel='stylesheet' href='/css/fitness.css')
+	style.
+		#myCarousel, .img {
+			height : 350px;
+		}
+
+block fitnessContent
+	div#content-main
+		h1 Create a New Workout
+			a#btn-help.pull-right(rel='tooltip' title='Help: How to Create a Workout')
+				img(src='/img/help/help.png')
+
+		div#success-container(style='display: none')
+			div#success-popup.alert.alert-block.alert-info.span5(align='center')
+				h4.alert-heading Workout Saved
+			br
+			br
+
+		div.row-fluid
+			div.span8
+				form#workout-form
+					strong Workout Date 
+					input#datepicker(type='text' name='date' value='#{date}')
+					input#numExs(type='hidden' name='numExs')
+					|  
+					input#btn-save.span2.btn.btn-primary.disabled(value='Save Workout')
+					|  
+					input#btn-delete.span2.btn.btn-danger.disabled(value='Delete Workout')
+					div#ex-drop
+						table#tbl-workout.table.table-bordered
+							thead
+								th
+								th Exercise
+								th Muscle
+								th Equipment
+								th Reps
+								th Weight
+								th Comments
+								th
+							tbody
+
+			div.span4
+				div.input-prepend
+					span.add-on
+						i.icon-search
+					input#input-search(type='search' placeholder=' Search Exercises')
+				div#search-exercise-list
+
+	div#content-help.well(style='display: none')
+		h1
+			u
+				i Help: Create Workout
+		br
+
+		div#myCarousel.carousel
+			div.carousel-inner(align='center')
+				font(color='white')
+					div#first-item.item.active
+						div.img
+							img(src="/img/help/workout-create/create-workout-0.png")
+						div.carousel-caption
+							| Start by clicking on the 
+							u "Workout Date
+							|  field. By default, the current date is selected.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-1.png")
+						div.carousel-caption
+							| A calender will then be displayed. On the calendar, select the date you would like to do the workout.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-2.png")
+						div.carousel-caption
+							| If there is already a workout created on that date, a list of exercises will be displayed for that workout date.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-3.png")
+						div.carousel-caption
+							| Otherwise, nothing is displayed meaning that there is no workout created for that day.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-4.png")
+						div.carousel-caption
+							| Next, on the right side of the page is our automated quick search. You're able to search by:
+							|  - Execise Name
+							|  - Muscle Group you wish to target
+							|  - Equipment used in an exercise
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-5.png")
+						div.carousel-caption
+							| A list of exercises will be generated with the search input you supplied. In our example, we searched for chest exercises.
+							|
+							| As you can see, the generated list displays the name of the exercise, muscle group being targeted, and equipment being used for that exercise.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-6.png")
+						div.carousel-caption
+							| From here, you are able to add exercises to a workout by clicking on the 
+							b +
+							|  sign.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-7.png")
+						div.carousel-caption
+							| The exercises will then be added to the workout table on the left.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-8.png")
+						div.carousel-caption
+							| You are able to rearrange the order of the workout by clicking the arrow on the left of the table, then dragging and then dropping the exercise in the order you would like.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-9.png")
+						div.carousel-caption
+							| Next fill in the "Reps", "Weight (lb)" and "Comment" fields if you think it is neccessary. These fields are optional and will be filled with 0's onces the workout is saved.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-10.png")
+						div.carousel-caption
+							| Once you are done creating a workout, click the 
+							u "Save Workout"
+							| button to save your workout and be able to view it again at another time.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-11.png")
+						div.carousel-caption
+							| If you made a mistake in adding the wrong exercise or don't want to do the exercise anymore, simply click on the 
+							u
+								font(color='red') X
+							|  button at the right side of the table to remove that exercise from your workout.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-12.png")
+						div.carousel-caption
+							| This is what our workout looks like after we deleted 'Incline Bench Press' from our previous slide.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-13.png")
+						div.carousel-caption
+							| Alternatively, you are able to delete an entire workout by clicking on the 
+							u 'Delete Workout'
+							|  button.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-14.png")
+						div.carousel-caption
+							| Once you clicked the 'Delete Workout' button, you will be asked to confirm the deletion of the workout.
+					div.item
+						div.img
+							img(src="/img/help/workout-create/create-workout-15.png")
+
+			a.carousel-control.left(href='#myCarousel' data-slide='prev') &lsaquo;
+			a.carousel-control.right(href='#myCarousel' data-slide='next') &rsaquo;
+		div
+			input#disable-help(type='checkbox')
+			|  Never Show Again
+			button#btn-close-help.btn.pull-right Close
+
+	div#modal-delete.modal.hide
+		div.modal-header
+			a.close(data-dismiss='modal') x
+			h3 Delete this Workout
+		div.modal-footer
+			button#btn-modal-close.btn Cancel
+			button#btn-modal-delete.btn.btn-danger Delete

@@ -1,0 +1,42 @@
+extends ../boilerplate
+
+block scripts
+	script.
+		$(document).ready(function() {
+			$('#li-admin').addClass('active');
+		});
+	block adminScripts
+
+block content
+	div.row-fluid
+		div.span2
+			ul.nav.nav-list
+				li.nav-header Administration
+				li#li-users
+					a(href='/admin/members')
+						i.icon-list-alt
+						|  All Members
+				li#li-pro-queue
+					a(href='/admin/professional_queue')
+						i.icon-list-alt
+						|  Professional Queue
+				li.nav-header Fitness
+				li#li-exercises
+					a(href='/admin/exercises')
+						i.icon-list-alt
+						|  Exercises
+				li#li-equipment
+					a(href='/admin/equipment')
+						i.icon-list-alt
+						|  Equipment
+				li#li-add-exercise
+					a(href='/admin/add_exercise')
+						i.icon-plus-sign
+						|  Add an Exercise
+				li#li-add-equipment
+					a(href='/admin/add_equipment')
+						i.icon-plus-sign
+						|  Add an Equipment
+
+		div.span10
+			block adminContent

@@ -1,0 +1,52 @@
+extends ../layout/l_admin
+
+block adminScripts
+	script(src='/js/admin/exercise.js')
+
+block adminContent
+	div#delete_window.modal.fade
+		div.modal-header
+			h2#delete_header(align='center')
+		div#delete-window-content.modal-body
+			table#delete_table.table.table-striped.table-bordered.table-condensed
+				thead
+					tr
+						th  Exercise
+						th
+							i.icon-fire
+							|  Muscle
+						th
+							i.icon-cog
+							|  Equipment
+						th  Exercise Type
+				tbody#delete_body
+		div.modal-footer
+			button#btn-confirm-delete.btn.btn-success Delete
+			button#btn-cancel-delete.btn Cancel
+
+	h1 Exercises
+	section#admin-buttons
+		span.btn-group
+			button#btn-select-all.btn.btn-small
+				i.icon-ok-sign
+				|  Select All
+			button#btn-select-none.btn.btn-small.disabled
+				i.icon-minus-sign
+				|  Select None
+			button#btn-remove-selected.btn.btn-small.btn-danger.disabled
+				i.icon-remove-sign.icon-white
+				|  Remove Selected
+	form(name='exercises_form')
+		table#table-exercises.table.table-striped.table-bordered.table-condensed
+			thead
+				tr
+					th
+					th  Exercise
+					th
+						i.icon-fire
+						|  Muscle
+					th
+						i.icon-cog
+						|  Equipment
+					th  Exercise Type
+			tbody#tbl-body

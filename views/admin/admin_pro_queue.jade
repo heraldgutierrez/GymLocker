@@ -1,0 +1,40 @@
+extends ../layout/l_admin
+
+block adminScripts
+	script(src='/js/admin/trainer_queue.js')
+
+block adminContent
+	div
+		h1 Members who wants a Trainer Status
+		section.btn-group
+			button#btn-select-all.btn.btn-small
+				i.icon-ok-sign
+				|  Select All
+			button#btn-select-none.btn.btn-small.disabled
+				i.icon-remove-sign
+				|  Select None
+			button#btn-approve-selected.btn.btn-small.btn-primary.disabled
+				i.icon-ok.icon-white
+				|  Approve Selected
+
+		section#pro-queue-form
+			form#pro-queue-reg(name='pro-queue-reg')
+				table#proQueueTable.table.table-striped.table-bordered.table-condensed
+					thead
+						tr
+							th
+							th Login Name
+					tbody#proBody
+
+	div#approve_window.modal.fade
+		div.modal-header
+			h2(align='center') Approving the following memberes to Trainer Status
+		div#approve-window-content.modal-body
+			table#approve_table.table.table-striped.table-bordered.table-condensed
+				thead
+					tr
+						th Login Name
+				tbody#approve_body
+		div.modal-footer
+			button#btn-confirm-approve.btn.btn-success Approve
+			button#btn-cancel-approve.btn Cancel

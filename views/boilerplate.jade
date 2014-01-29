@@ -1,0 +1,55 @@
+doctype 5
+html
+	head
+		title= title
+
+		link(rel='stylesheet' href='/css/jquery-ui-1.8.17.custom.css')
+		link(rel='stylesheet' href='/css/bootstrap.css')
+		link(rel='stylesheet' href='/css/style.css')
+		block stylesheets
+
+		script(src='/js/libs/jquery-1.7.1.min.js')
+		script(src='/js/libs/bootstrap.js')
+		script(src='/js/layout.js')
+		block scripts
+
+	body!= body
+		div#main-nav.navbar.navbar-fixed-top
+			div.navbar-inner
+				div.container
+					ul.nav
+						a.brand(href='/main') GymLocker
+						if role == 1
+							li#li-admin
+								a#nav-admin(href='/admin/members') Admin
+
+						li#li-fitness
+							a#nav-fitness(href='/fitness/library') Fitness
+						//- li#li-biometric
+						//- 	a#nav-biometric(href='/GymLocker/biometrics') Biometrics
+
+						if role == 2
+							li#li-pro
+								a#nav-trainer(href='/trainer/clients') Trainer
+
+						//- li#li-find
+						//-	a#nav-find-trainer(href='/GymLocker/find_a_trainer') Marketplace
+
+					span.pull-right
+						ul.nav
+							if role == 2
+								li
+									a#requests(href='/trainer/requests' title='Quick_requests')
+
+							//- if role != 4
+							//- 	li
+							//- 		a(href='/GymLocker/settings' title='Settings')
+							//- 			i.icon-cog.icon-white
+							//- 			|  Settings
+
+							li
+								a(href='/logout' title='Logout')
+									i.icon-off.icon-white
+									|  Logout
+
+		block content

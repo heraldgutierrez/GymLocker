@@ -1,0 +1,35 @@
+/* Search Results */
+#search-exercise-list {
+	position: absolute;
+	width: 300px;
+	max-height: 500px;
+	overflow: scroll;
+	z-index: 100;
+	padding-right: 10px;
+}
+
+.search-results {
+	padding: 8px 10px 8px 10px;
+	margin-bottom: 2px;
+	background-color: #FCF8E3;
+	border: 2px solid #FAE2C0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.search-results:hover {
+	background-color: #FAE2C0;	
+}
+
+/* Fitness - Library */
+.tab-content {
+	width : 1000px;
+}
+
+#libraryCarousel, .libraryImg {
+    height : 550px;
+}
+
+/* Fitness - Create */
+

@@ -1,5 +1,6 @@
 GymLocker
 =========
+![ScreenShot](https://raw.github.com/iheyroldy/PersonalWebsite/master/public/img/preview-gymlocker.png)
 - GymLocker is a fitness application. Users are able to search for exercises by "Muscle Groups" or querying by a term. Each exercise includes the name of the exercise, instructions on how to perform the exercise, any equipment needed, and the type of exercise it is (eg. Strength, Cardio, or Flexibity). Some exercises provide YouTube videos to compliment the instructions. Along with searching for exercises, users are able to create a workout. A workout is a list of exercises.
 - Originally, this was my University of Manitoba - Comp 4350: Software Engineering 2 group project
   - This was originally written in PERL with MySQL

@@ -11,3 +11,13 @@ GymLocker
     - Converting HTML files into Jade files, with proper syntax
     - How to use MongoDB, which is a NoSQL database, and connecting it to Node.js with Mongoose
     - Performing database queries and returning the results as a JSON object back to the webpage via an AJAX call
+
+
+To Do:
+-------
+- Finish "Create a Workout"
+  - Save exercises into a workout
+    - Figure out how to save into mongoDB
+- View "Biometrics"
+- View "Stats"
+- Integrate "Nike Plus"

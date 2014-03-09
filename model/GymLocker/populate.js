@@ -36,10 +36,10 @@ function tryPopulate() {
 			populateMuscle();
 	});
 
-	UserModel.find({}, function(err, result) {
-		if(result.length == 0)
-			populateUser();
-	});
+	// UserModel.find({}, function(err, result) {
+	// 	if(result.length == 0)
+	// 		populateUser();
+	// });
 
 	console.log('Populating Complete...');
 }
@@ -640,23 +640,23 @@ function populateMuscle() {
 }
 
 // Pre-populate "Users" collection with admins
-function populateUser() {
-	console.log('Starting: Populating User...');
-	var admins = [
-		new UserModel({
-			username : 'herald',
-			password : 'pass',
-			role : 1
-		}),
-		new UserModel({
-			username : 'admin',
-			password : 'pass',
-			role : 1
-		})
-	];
+// function populateUser() {
+// 	console.log('Starting: Populating User...');
+// 	var admins = [
+// 		new UserModel({
+// 			username : 'herald',
+// 			password : 'pass',
+// 			role : 1
+// 		}),
+// 		new UserModel({
+// 			username : 'admin',
+// 			password : 'pass',
+// 			role : 1
+// 		})
+// 	];
 
-	for(var i = 0; i < admins.length; i++) {
-		admins[i].save(function(err, result) {});
-	}
-	console.log('Done: Populating User.');
-}
+// 	for(var i = 0; i < admins.length; i++) {
+// 		admins[i].save(function(err, result) {});
+// 	}
+// 	console.log('Done: Populating User.');
+// }

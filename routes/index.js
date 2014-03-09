@@ -24,21 +24,28 @@ exports.login = function(req, res) {
 
 	console.log('Attempting to login: ' + name);
 
-	UserModel.findOne(
-		{ 	username : name,
-			password : pass
-		},
-		function(err, result) {
-			// if(result == null) --> no users exists, okay to save new user
-			if(result == null) {
+	UserModel.findOne({	username : name	},
+		function(err, user) {
+			// if(user == null) --> no users exists, okay to save new user
+			if(user == null) {
 				// incorrect username/password
 				console.log('Incorrect login');
 				res.redirect('/?warning=incorrectLogin');
 			} else {
-				// reload home page with warning that username already exists
-				console.log('Logging in: ' + name);
-				req.session.currentUser = result;
-				res.redirect('/main');
+				user.comparePassword(pass, function(err, isMatch) {
+					if(err)
+						throw err;
+
+					if(isMatch) {
+						req.session.currentUser = user;
+						// reload home page with warning that username already exists
+						console.log('Logging in: ' + name);
+						req.session.currentUser = user;
+						res.redirect('/main');
+					} else {
+						res.redirect('/login?warning=incorrect');
+					}
+				});
 			}
 		}// end: function
 	);// end: findOne

@@ -32,8 +32,7 @@ exports.get_previous_workouts = function(req, res) {
 		date : { $lt : today } 
 	}).exec(
 		function(err, result) {
-			// console.log(result);
-			res.json(result.length);
+			res.json(result);
 		}
 	);
 };
@@ -47,7 +46,7 @@ exports.get_planned_workouts = function(req, res) {
 		date : { $gte : today }
 	}).exec(
 		function(err, result) {
-			res.json(result.length);
+			res.json(result);
 		}
 	);
 };
@@ -82,6 +81,7 @@ exports.get_ex_search_results = function(req, res) {
 	);
 };
 
+// need to format date to pad a 0 for numbers < 10
 function getTodayDateString() {
 	var date = new Date();
 	var year = date.getFullYear();
@@ -96,6 +96,7 @@ function getTodayDateString() {
 	return today;
 }
 
+// from create: add exercises from create a workout
 exports.save_workout = function(req, res) {
 	var curr = req.session.currentUser;
 	var date = req.body.date;
@@ -110,7 +111,7 @@ exports.save_workout = function(req, res) {
 			workout.save();
 
 			for(var i = 0; i < exs.length; i++) {
-				addExerciseToWorkout(curr._id, date, exs[i], i);
+				addExerciseToWorkout(curr._id, date, exs[i]);
 			}
 		} else {
 			var wo = new WorkoutModel({
@@ -122,7 +123,7 @@ exports.save_workout = function(req, res) {
 			wo.save(function(err, result) {});
 
 			for(var i = 0; i < exs.length; i++) {
-				addExerciseToWorkout(curr._id, date, exs[i], i);
+				addExerciseToWorkout(curr._id, date, exs[i]);
 			}
 		}
 
@@ -132,9 +133,10 @@ exports.save_workout = function(req, res) {
 	res.json({success : true});
 };
 
-function addExerciseToWorkout(id, date, ex, index) {
+function addExerciseToWorkout(id, date, ex) {
 	var exercise;
 
+	console.log(ex);
 	ExerciseModel.findOne({ _id : ex.id }).exec(function(err, exer) {
 		if(err)
 			throw err;
@@ -175,6 +177,35 @@ exports.delete_workout = function(req, res) {
 	}, function(err, workout) {
 		if(workout != null)
 			workout.remove();
+	});
+
+	res.json({success : true});
+};
+
+
+// From library: add exercise to workout
+exports.add_to_existing_workout = function(req, res) {
+	var curr = req.session.currentUser;
+	var date = req.body.date;
+	var exercise = req.body.exercise;
+
+	WorkoutModel.findOne({ 
+		user_id : new ObjectId(curr._id),
+		date 	: date
+	}, function(err, workout) {
+		if(workout != null) {
+			addExerciseToWorkout(curr._id, date, exercise);
+		} else {
+			var wo = new WorkoutModel({
+				user_id 	: curr._id,
+				date 		: date,
+				exercises 	: []
+			});
+
+			wo.save(function(err, result) {});
+
+			addExerciseToWorkout(curr._id, date, exercise);
+		}
 	});
 
 	res.json({success : true});

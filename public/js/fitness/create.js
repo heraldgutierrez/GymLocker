@@ -199,7 +199,6 @@ function createSetForm(ex) {
 
 	var td_name = '<td class="ex-name">'
 	td_name += ex.name;
-	// var ex_id = '<input type="hidden" name="ex_id_' + field_id + '" value="' + ex._id + '" />';
 	var ex_id = '<input type="hidden" name="ex_id" value="' + ex._id + '" />';
 	td_name += ex_id;
 	td_name += '</td>';
@@ -216,22 +215,19 @@ function createSetForm(ex) {
 	tr += td_equip;
 
 	var td_reps = '<td>';
-	// var input_reps = '<input type="number" class="ex-number-input" name="ex_reps_' + field_id + '" min="0" placeholder="reps" value="' + ex.reps + '" />';
-	var input_reps = '<input type="number" class="ex-number-input" name="ex_reps" min="0" placeholder="reps" value="' + ex.reps + '" />';
+	var input_reps = '<input type="number" class="ex-number-input" name="ex_reps" min="0" placeholder="Reps" value="' + ex.reps + '" />';
 	td_reps += input_reps;
 	td_reps += '</td>';
 	tr += td_reps;
 
 	var td_weight = '<td>';
-	// var input_weight = '<input type="number" class="ex-number-input" name="ex_weight_' + field_id + '" min="0" placeholder="weight" value="' + ex.weight + '" />';
-	var input_weight = '<input type="number" class="ex-number-input" name="ex_weight" min="0" placeholder="weight" value="' + ex.weight + '" />';
+	var input_weight = '<input type="number" class="ex-number-input" name="ex_weight" min="0" placeholder="Weight" value="' + ex.weight + '" />';
 	td_weight += input_weight;
 	td_weight += '</td>';
 	tr += td_weight;
 
 	var td_comm = '<td>';
 	var comm_text = ex.comments ? ex.comments : '';
-	// var comm = '<input type="textarea" name="ex_com_' + field_id + '" placeholder="Comments" value="' + comm_text + '" />';
 	var comm = '<input type="textarea" name="ex_com" placeholder="Comments" value="' + comm_text + '" />';
 	td_comm += comm;
 	td_comm += '</td>';

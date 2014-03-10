@@ -10,7 +10,7 @@ function setPreviousWorkouts(){
 	$.getJSON(
 		'/fitness/get_previous_workouts',
 		function(data){
-			$('#workouts-completed').text(data);
+			$('#workouts-completed').text(data.length);
 		});
 };
 
@@ -18,7 +18,7 @@ function setPlannedWorkouts(){
 	$.getJSON(
 		'/fitness/get_planned_workouts',
 		function(data){
-			$('#workouts-planned').text(data);
+			$('#workouts-planned').text(data.length);
 		});
 };
 

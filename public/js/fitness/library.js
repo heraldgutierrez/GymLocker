@@ -4,7 +4,7 @@ $(document).ready(function() {
     $("#btn-help").tooltip({trigger: 'hover', placement: 'bottom'});
 
     setSettings();
-    // getAllWorkouts();
+    getAllWorkouts();
 
     $('#btn-help').click(function() { openHelp(); });
     $('#btn-close-help').click(function() { closeHelp(); });
@@ -56,6 +56,7 @@ $(document).ready(function() {
 
     $('#btn-add-workout').click(function() {
         if ($('#select-date').val() == 0) {
+            formatDatePicker();
             $('#btn-add-workout').hide();
             $('#btn-create-workout').show();
 
@@ -195,19 +196,15 @@ function fillResultTable(data, term) {
 }
 
 function getAllWorkouts() {
-    var date = '';
-
     $.getJSON(
-        '/fitness/get_all_workout_dates', 
+        '/fitness/get_planned_workouts', 
         function(data) {
             $.each(data, function(i, line) {
-                if (line.date >= date) {
-                    var option = document.createElement('option');
+                var option = document.createElement('option');
 
-                    option.value = line.date;
-                    option.innerHTML = line.date;
-                    $('#select-date').append(option);
-                }
+                option.value = line.date;
+                option.innerHTML = line.date;
+                $('#select-date').append(option);
             });
         }
     );
@@ -234,23 +231,35 @@ function openVideo(exercise, url) {
 }
 
 function addToWorkout(id, name, muscle) {
-    alert('Adding Exercise to a Workout still needs to be implemented...');
+    $('#workout-header').html('Adding "' + name + '" to a workout.');
+    $('#add-exercise').val(id);
+    $('#add-reps').val(0);
+    $('#add-weight').val(0);
 
-    // $('#workout-header').html('Adding "' + name + '" to a workout.');
-    // $('#add-exercise').val(id);
-    // $('#add-reps').val(0);
-    // $('#add-weight').val(0);
+    $('#btn-add-workout').show();
+    $('#btn-create-workout').hide();
 
-    // $('#btn-add-workout').show();
-    // $('#btn-create-workout').hide();
+    $('#add-date').show();
+    $('#create-date').hide();
+    $('#workout-window').modal('show');
+}
 
-    // $('#add-date').show();
-    // $('#create-date').hide();
-    // $('#workout-window').modal('show');
+function formatDatePicker() {
+    var date = $('#datepicker').val();
+    var token = date.split('/');
+    var month = token[0];
+    var day = token[1];
+    var year = token[2];
+
+    month = (month < 10 && month.length < 2) ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    var today = month + '/' + day + '/' + year;
+    $('#datepicker').val(today);
 } 
 
 function reloadWorkouts() {
-    $('#select-date').children().remove();
+    $('#select-date').empty();
 
     var option = document.createElement('option');
     option.value = '0';
@@ -262,16 +271,21 @@ function reloadWorkouts() {
 }
 
 function saveWorkout(date, exercise, reps, weight, comment) {
+    var id = $('#add-exercise').val();
+    var ex = {
+            id : id,
+            reps : reps,
+            weight : weight,
+            comment : comment
+        };
+
     $.ajax({
         type:   'post',
         url:    '/fitness/add_to_existing_workout',
         data:       
         {
-            'date'      : date,
-            'exercise'  : exercise,
-            'reps'      : reps,
-            'weight'    : weight,
-            'comment'   : comment
+            'date'  : date,
+            'exercise'   : ex
         },
         success:    function() {
                 $('#workout-window').modal('hide');
@@ -281,7 +295,6 @@ function saveWorkout(date, exercise, reps, weight, comment) {
 }
 
 function resultClicked(ex) {
-    // alert(JSON.stringify(ex));
     fillResultTable([ex], ex.name);
     $('#exercise_header').html('Details for: ' + ex.name);
 }

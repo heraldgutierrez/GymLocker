@@ -2,7 +2,6 @@ var field_id = 0;
 
 $(document).ready(function() {
 	$('#workout-dropdown').addClass('active');
-	$('#datepicker').datepicker();
 	$('#modal-delete').modal('hide');
 	$('.carousel').carousel({ interval : 10000 });
 	$('#btn-help').tooltip({ 
@@ -12,6 +11,8 @@ $(document).ready(function() {
 
 	$('#btn-create-wo').addClass('active');
 
+	$('#datepicker').datepicker();
+	formatDatePicker();
 	
 
 	setSettings();
@@ -58,6 +59,20 @@ $(document).ready(function() {
 		saveHelpPreference($(this).is(':checked'));
 	});
 });
+
+function formatDatePicker() {
+	var date = $('#datepicker').val();
+	var token = date.split('/');
+	var month = token[0];
+	var day = token[1];
+	var year = token[2];
+
+	month = (month < 10 && month.length < 2) ? '0' + month : month;
+	day = day < 10 ? '0' + day : day;
+
+	var today = month + '/' + day + '/' + year;
+	$('#datepicker').val(today);
+}
 
 function setSettings() {
     $.getJSON(

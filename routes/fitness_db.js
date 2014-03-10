@@ -9,7 +9,6 @@ var WorkoutModel = mongoose.model('Workout');
 
 // var ProQueModel = mongoose.model('ProQueue');
 var ObjectId = mongoose.Types.ObjectId;
-// var id = new ObjectId('id string');
 
 var async = require('async');
 
@@ -53,7 +52,8 @@ exports.check_existing_workouts = function(req, res) {
 		date = getTodayDateString();
 	}
 
-	WorkoutModel.find({ user_id : curr._id, date : { $gte : date } }).exec(
+	// WorkoutModel.find({ user_id : curr._id, date : { $gte : date } }).exec(
+	WorkoutModel.find({ user_id : curr._id, date : date }).exec(
 		function(err, result) {
 			res.json(result);
 		}
@@ -88,39 +88,73 @@ function getTodayDateString() {
 }
 
 exports.save_workout = function(req, res) {
-	var body = req.body;
-	var date = body.date;
-	var exs = body.exs;
+	var curr = req.session.currentUser;
+	var date = req.body.date;
+	var exs = req.body.exs;
 
-	console.log(exs.length);
-	// console.log(JSON.parse(body));
-	var e = ['test'];
+	WorkoutModel.findOne({ 
+		user_id : new ObjectId(curr._id),
+		date 	: date
+	}, function(err, workout) {
+		if(workout != null) {
+			workout.exercises = [];
+			workout.save();
 
-	async.series([
-		function(callback) {
 			for(var i = 0; i < exs.length; i++) {
-				console.log(exs[i].id);
-				// getExerciseByID(exs[i].id);
-				// console.log('1. ' + e);
+				addExerciseToWorkout(curr._id, date, exs[i], i);
+			}
+		} else {
+			var wo = new WorkoutModel({
+				user_id 	: curr._id,
+				date 		: date,
+				exercises 	: []
+			});
 
-				ExerciseModel.findOne({ _id : exs[i].id }).exec(function(err, result) {
-					e.push(result);
-					// console.log(e.length)
-					// console.log(result);
-					callback(null, e);
+			wo.save(function(err, result) {});
+
+			for(var i = 0; i < exs.length; i++) {
+				addExerciseToWorkout(curr._id, date, exs[i], i);
+			}
+		}
+
+		
+	});
+
+	res.json({success : true});
+};
+
+function addExerciseToWorkout(id, date, ex, index) {
+	var exercise;
+
+	ExerciseModel.findOne({ _id : ex.id }).exec(function(err, exer) {
+		if(err)
+			throw err;
+
+		if(exer != null) {
+			exercise = exer;
+
+			WorkoutModel.findOne({ 
+				user_id : new ObjectId(id),
+				date 	: date
+			}, function(err, workout) {
+				workout.exercises.push({
+					'_id'			: exercise._id,
+					'name' 			: exercise.name,
+					'description' 	: exercise.description,
+					'muscle' 		: exercise.muscle,
+					'equip' 		: exercise.equip,
+					'exercise_type' : exercise.exercise_type,
+					'video' 		: exercise.video,
+					'reps' 			: ex.reps,
+					'weight' 		: ex.weight,
+					'comments' 		: ex.comment
 				});
 
-				// console.log('2. ' + e);
-			}
-
-			// console.log('3. ' + e);
-		}
-	],
-	function(err, result) {
-		console.log('e: ' + e);
-		console.log('result: ' + result);
-	});
-};
+				workout.save();
+			});// WorkoutModel
+		}// if(null)
+	});// ExerciseModel
+}
 
 function getExerciseByID(id) {
 	var id = new ObjectId(id);

@@ -229,34 +229,20 @@ function users() {
 }
 
 function workouts() {
-	var ESchema = new Schema({
-		name 		: String,
-		description	: String,
-		muscle 		: String,
-		equip		: String,
-		exercise_type : String,
-		video 		: String
-	});
-
-	// var WSchema = new Schema({
-	// 	user_id 	: String,
-	// 	workout_id 	: String,
-	// 	date 		: String,
-	// 	exercise	: String,
-	// 	reps 		: String,
-	// 	weight		: String,
-	// 	muscle 		: String,
-	// 	comments 	: String
-	// });
-
 	var WSchema = new Schema({
 		user_id 	: String,
-		workout_id 	: String,
 		date 		: String,
-		reps 		: String,
-		weight		: String,
-		comments 	: String,
-		exercises 	: [ESchema]
+		exercises 	: [{
+			name 		: String,
+			description : String,
+			muscle 		: String,
+			equip 		: String,
+			exercise_type : String,
+			video 		: String,
+			reps 		: Number,
+			weight 		: Number,
+			comments 	: String
+		}]
 	});
 
 	mongoose.model('Workout', WSchema);

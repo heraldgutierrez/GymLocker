@@ -15,7 +15,7 @@ $(document).ready(function() {
 	
 
 	setSettings();
-	// checkForExistingWorkout($('#datepicker').val());	// Check to see if there is an existing workout for today
+	checkForExistingWorkout($('#datepicker').val());	// Check to see if there is an existing workout for today
 
 	$('#tbl-workout tbody').sortable({
 		helper: function(e, ui) {
@@ -32,15 +32,15 @@ $(document).ready(function() {
 	$('#datepicker').on('change', function() { checkForExistingWorkout( $(this).val() ); });
 
 	$('#btn-save').click(function() { 
-		alert('Saving Workout still needs to be implemented...');
-		// if(!$(this).hasClass('disabled'))
-		// 	saveWorkout(); 
+		if(!$(this).hasClass('disabled'))
+			saveWorkout(); 
 	});
 
 	$('#btn-delete').click(function() { 
 		if(!$(this).hasClass('disabled'))
 			$('#modal-delete').modal('show'); 
 	});
+
 	$('#btn-modal-close').click(function() { $('#modal-delete').modal('hide'); });
 	$('#btn-modal-delete').click(function() { deleteWorkout($('#datepicker').val()); });
 
@@ -92,7 +92,8 @@ function checkForExistingWorkout(date) {
 function createExistingTable(data) {
 	$('#tbl-workout tbody').html('');
 	$('#btn-save, #btn-delete').removeClass('disabled');
-	$.each(data, function(i, ex) {
+	var exercises = data[0].exercises;
+	$.each(exercises, function(i, ex) {
 		createSetForm(ex);
 	});
 }

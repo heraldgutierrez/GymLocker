@@ -32,4 +32,10 @@
 }
 
 /* Fitness - Create */
+.form-horizontal {
+	background-color: white;
+}
 
+.form-horizontal:hover {
+	background-color: #eee;
+}

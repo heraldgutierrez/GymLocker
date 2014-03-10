@@ -1,6 +1,7 @@
 
 body {
   padding-top: 60px;
+  min-width: 1150px;
 }
 
 /* Subnav */

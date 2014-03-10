@@ -45,6 +45,7 @@ exports.db_get_planned_workouts = fitness_db.get_planned_workouts;
 exports.db_check_existing_workouts = fitness_db.check_existing_workouts;
 exports.db_get_ex_search_results = fitness_db.get_ex_search_results;
 exports.db_save_workout = fitness_db.save_workout;
+exports.db_delete_workout = fitness_db.delete_workout;
 
 // User Query/JSON
 exports.get_settings = user.get_settings;

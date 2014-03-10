@@ -90,6 +90,7 @@ app.get('/fitness/check_existing_workout', routes.db_check_existing_workouts);
 app.get('/get_exercises_by_muscle', routes.db_get_exercises_by_muscle);
 app.get('/fitness/get_ex_search_results', routes.db_get_ex_search_results);
 app.post('/fitness/save_workout', routes.db_save_workout);
+app.post('/fitness/delete_workout', routes.db_delete_workout);
 
 // user JSON calls
 app.get('/get_settings', routes.get_settings);

@@ -165,6 +165,21 @@ function addExerciseToWorkout(id, date, ex, index) {
 	});// ExerciseModel
 }
 
+exports.delete_workout = function(req, res) {
+	var curr = req.session.currentUser;
+	var date = req.body.date;
+
+	WorkoutModel.findOne({ 
+		user_id : new ObjectId(curr._id),
+		date 	: date
+	}, function(err, workout) {
+		if(workout != null)
+			workout.remove();
+	});
+
+	res.json({success : true});
+};
+
 function getExerciseByID(id) {
 	var id = new ObjectId(id);
 	var curr = req.session.currentUser;

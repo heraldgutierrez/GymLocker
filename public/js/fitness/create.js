@@ -122,6 +122,7 @@ function deleteWorkout(date) {
 			$('#modal-delete').modal('hide');
 			$('#btn-save, #btn-delete').addClass('disabled');
 			$('#tbl-workout tbody').html('');
+			$('#delete-container').show().delay(5000).fadeOut();
 		}
 	});
 }

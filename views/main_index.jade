@@ -4,6 +4,14 @@ block scripts
 	script(src='/js/main_index.js')
 
 block content
+	div#video_window.videoModal.fade
+		div.modal-header
+			a.close(data-dismiss='modal') x
+			h2#video-header
+		div#video-content.modal-body
+		div.modal-footer
+			button#btn-close-video.btn Close
+
 	div.container
 		input#user_id(type='hidden' value='#{user_id}')
 		div.row
@@ -42,6 +50,7 @@ block content
 						th Muscle Group
 						th Equipment
 						th Comments
+						th Video
 					tbody#body
 
 			div#noWorkout(style='display: none')

@@ -25,9 +25,14 @@ exports.get_exercises_by_muscle = function(req, res) {
 exports.get_previous_workouts = function(req, res) {
 	var curr = req.session.currentUser;
 	var today = getTodayDateString();
+	console.log(today);
 
-	WorkoutModel.distinct('workout_id', { user_id : curr._id, date : { $lt : today } }).exec(
+	WorkoutModel.find({ 
+		user_id : new ObjectId(curr._id), 
+		date : { $lt : today } 
+	}).exec(
 		function(err, result) {
+			// console.log(result);
 			res.json(result.length);
 		}
 	);
@@ -37,7 +42,10 @@ exports.get_planned_workouts = function(req, res) {
 	var curr = req.session.currentUser;
 	var today = getTodayDateString();
 
-	WorkoutModel.distinct('workout_id', { user_id : curr._id, date : { $gte : today }}).exec(
+	WorkoutModel.find({ 
+		user_id : new ObjectId(curr._id), 
+		date : { $gte : today }
+	}).exec(
 		function(err, result) {
 			res.json(result.length);
 		}
@@ -80,8 +88,9 @@ function getTodayDateString() {
 	var day = date.getDate();
 	var month = date.getMonth() + 1;
 
-	if(month < 10)
-		month = '0' + month;
+	month = month < 10 ? '0' + month : month;
+	day = day < 10 ? '0' + day : day;
+
 	var today = month + '/' + day + '/' + year;
 
 	return today;

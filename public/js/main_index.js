@@ -2,6 +2,8 @@ $(document).ready(function() {
 	setPreviousWorkouts();
 	setPlannedWorkouts();
 	getExercisesOnDate();
+
+	$('#btn-close-video').click(function() { $('#video_window').modal('hide'); });
 });
 
 function setPreviousWorkouts(){
@@ -21,55 +23,76 @@ function setPlannedWorkouts(){
 };
 
 function getExercisesOnDate() {
-    var userId = $('#user_id').val();
+	var userId = $('#user_id').val();
 
-    $.getJSON(
-        '/fitness/check_existing_workout', 
-        { }, 
-        function(data){
-            if(data.length != 0) {
-                // var tr,
-                //     td_id,
-                //     td_name,
-                //     td_reps,
-                //     td_weight,
-                //     td_comment,
-                //     td_equip,
-                //     td_muscle;
-                    
-                $.each(data, function(i, line) {
-                    var tr = document.createElement('tr'),
-                        td_id = document.createElement('td'),
-                        td_name = document.createElement('td'),
-                        td_reps = document.createElement('td'),
-                        td_weight = document.createElement('td'),
-                        td_comment = document.createElement('td'),
-                        td_equip = document.createElement('td'),
-                        td_muscle = document.createElement('td');
+	$.getJSON(
+		'/fitness/check_existing_workout', 
+		function(data){
+			if(data.length != 0) {
+				var exercises = data[0].exercises;
 
-                    td_name.innerHTML = line.exercise;
-                    tr.appendChild(td_name);
+				$.each(exercises, function(i, exercise) {
+					var tr = document.createElement('tr'),
+						td_id = document.createElement('td'),
+						td_name = document.createElement('td'),
+						td_reps = document.createElement('td'),
+						td_weight = document.createElement('td'),
+						td_comment = document.createElement('td'),
+						td_equip = document.createElement('td'),
+						td_muscle = document.createElement('td'),
+						td_video = document.createElement('td');
+					var btn_video;
 
-                    td_reps.innerHTML = line.reps;
-                    tr.appendChild(td_reps);
+					td_name.innerHTML = exercise.name;
+					tr.appendChild(td_name);
 
-                    td_weight.innerHTML = line.weight;
-                    tr.appendChild(td_weight);
+					td_reps.innerHTML = exercise.reps;
+					tr.appendChild(td_reps);
 
-                    td_muscle.innerHTML = line.muscle;
-                    tr.appendChild(td_muscle);
+					td_weight.innerHTML = exercise.weight;
+					tr.appendChild(td_weight);
 
-                    td_equip.innerHTML = line.equipment;
-                    tr.appendChild(td_equip);
+					td_muscle.innerHTML = exercise.muscle;
+					tr.appendChild(td_muscle);
 
-                    td_comment.innerHTML = line.comments;
-                    tr.appendChild(td_comment);
+					td_equip.innerHTML = exercise.equip;
+					tr.appendChild(td_equip);
 
-                    $('#body').append(tr);
-                });
-            } else {
-    			$('#noWorkout').show();
-    			$('#workout').hide();
-    		}
-    });
+					td_comment.innerHTML = exercise.comments;
+					tr.appendChild(td_comment);
+
+					if((exercise.video).length != 0) {
+						btn_video = '<button class="btn btn-small" onclick="openVideo(\'' + exercise.name  + '\', \'' + exercise.video + '\');" >View Video</button>';
+						td_video.innerHTML = '<td>' + btn_video + '</td>';
+					}
+					tr.appendChild(td_video);
+
+					$('#body').append(tr);
+				});
+			} else {
+				$('#noWorkout').show();
+				$('#workout').hide();
+			}
+		}
+	);
+};
+
+function openVideo(exercise, url) {
+    var video = '';
+
+    var token = url.split('?');
+    var shorturl = token[1].substring(2, token[1].length);
+
+    token = shorturl.split('&');
+    video = token[0];
+    
+    $('#video-header').html(exercise);
+    var embedCode = '<object><param id="param-movie" name="movie" value="http://www.youtube.com/v/' + video 
+        + 'IHbY3blOGwc?version=3&amp;hl=en_US&amp;rel=0&amp;autoplay=1"></param>'
+        + '<param name="allowFullScreen" value="true"></param>'
+        + '<param name="allowscriptaccess" value="always"></param>'
+        + '<embed id="embed-movie" src="http://www.youtube.com/v/' + video + '?version=3&amp;hl=en_US&amp;rel=0&amp;autoplay=1" type="application/x-shockwave-flash" width="550" height="315" allowscriptaccess="always" allowfullscreen="true"></embed>'
+        + '</object>';
+    $('#video-content').html(embedCode);
+    $('#video_window').modal('show');
 };

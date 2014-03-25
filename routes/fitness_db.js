@@ -25,7 +25,6 @@ exports.get_exercises_by_muscle = function(req, res) {
 exports.get_previous_workouts = function(req, res) {
 	var curr = req.session.currentUser;
 	var today = getTodayDateString();
-	console.log(today);
 
 	WorkoutModel.find({ 
 		user_id : new ObjectId(curr._id), 
@@ -44,7 +43,7 @@ exports.get_planned_workouts = function(req, res) {
 	WorkoutModel.find({ 
 		user_id : new ObjectId(curr._id), 
 		date : { $gte : today }
-	}).exec(
+	}).sort({ date : 1 }).exec(
 		function(err, result) {
 			res.json(result);
 		}
@@ -136,7 +135,6 @@ exports.save_workout = function(req, res) {
 function addExerciseToWorkout(id, date, ex) {
 	var exercise;
 
-	console.log(ex);
 	ExerciseModel.findOne({ _id : ex.id }).exec(function(err, exer) {
 		if(err)
 			throw err;

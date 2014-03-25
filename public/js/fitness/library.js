@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     $('#btn-create-workout').click(function() {
         saveWorkout($('#datepicker').val(), $('#add-exercise').val(), $('#add-reps').val(), $('#add-weight').val(), $('#add-comment').val() );
-        reloadWorkouts();
+        // reloadWorkouts();
     });
 });
 
@@ -290,6 +290,7 @@ function saveWorkout(date, exercise, reps, weight, comment) {
         success:    function() {
                 $('#workout-window').modal('hide');
                 $('#select-date').val(0);
+                reloadWorkouts();
             },
     });
 }
